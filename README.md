@@ -1,0 +1,2 @@
+# rpmspecs
+rpmspecs for CentOS
