@@ -16,6 +16,11 @@ BuildRequires:  gcc-c++
 BuildRequires:  byacc
 BuildRequires:  inn
 Requires:       libtool-ltdl
+Requires:       libtool
+Requires:       bzip2
+Requires:       unzip
+Requires:       zip
+Requires:       bison
 Requires:       inn
 Requires:	postfix
 
@@ -27,23 +32,41 @@ DS fork of fidogate. It can be used as:
  * Fido File Processor
  * Fido Areafix/Filefix
 
+
 %prep
 %setup -q -n fidogate-master
+
+%configure
+--prefix=/usr \
+--exec-prefix=/usr \
+--with-logdir=/var/log/fido/gate \
+--with-vardir=/var/lib/fidogate \
+--with-spooldir=/var/spool/fido/gate \
+--with-btbasedir=/var/spool/fido/bt \
+--with-sysconfdir=/etc/fidogate \
+--with-newsbindir=/usr/libexec/news \
+--disable-desc-dir \
+--with-owner=news \
+--with-group=news
 
 %build
 libtoolize
 ./autogen.sh
-%configure --with-newsbindir=/usr/libexec/news --prefix=/usr --with-owner=news --with-group=news
-%make_build
+make DEBUG=-O2
 
+%make_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %make_install prefix=%{_prefix}/.. exec_prefix=%{_prefix} libdir=%{_libdir}
 
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files
+%doc TODO TODO.rus ChangeLog Changes.ru doc/README doc/FAQ.ru doc/README.ru
 %license COPYING
+
 %{_bindir}/areasbbssync
 %{_bindir}/areassucksync
 %{_bindir}/ftnaf
@@ -81,8 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/sumcrc
 %config %{_sysconfdir}/acl.sample
 %config %{_sysconfdir}/aliases.sample
-%doc %{_sysconfdir}/areafix.help.rus
-%doc %{_sysconfdir}/areafix.help.sample
 %config %{_sysconfdir}/bounce.acl
 %config %{_sysconfdir}/bounce.acl_netmail
 %config %{_sysconfdir}/bounce.addrinto
