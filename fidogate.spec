@@ -11,6 +11,7 @@ BuildRequires:  libtool
 BuildRequires:  libtool-ltdl
 BuildRequires:  autogen
 BuildRequires:  automake
+BuildRequires:  unzip
 BuildRequires:  glibc-devel
 BuildRequires:  gcc-c++
 BuildRequires:  byacc
