@@ -16,7 +16,6 @@ BuildRequires:  gcc-c++
 BuildRequires:  byacc
 BuildRequires:  inn
 Requires:       libtool-ltdl
-Requires:       libtool
 Requires:       bzip2
 Requires:       unzip
 Requires:       zip
@@ -36,23 +35,21 @@ DS fork of fidogate. It can be used as:
 %prep
 %setup -q -n fidogate-master
 
-%configure
---prefix=/usr \
---exec-prefix=/usr \
---with-logdir=/var/log/fido/gate \
---with-vardir=/var/lib/fidogate \
---with-spooldir=/var/spool/fido/gate \
---with-btbasedir=/var/spool/fido/bt \
---with-sysconfdir=/etc/fidogate \
---with-newsbindir=/usr/libexec/news \
---disable-desc-dir \
---with-owner=news \
---with-group=news
+%configure --prefix=/usr \
+	   --exec-prefix=/usr \
+	   --with-logdir=/var/log/fido/gate \
+	   --with-vardir=/var/lib/fidogate \
+	   --with-spooldir=/var/spool/fido/gate \
+	   --with-btbasedir=/var/spool/fido/bt \
+	   --with-sysconfdir=/etc/fidogate \
+	   --with-newsbindir=/usr/libexec/news \
+	   --disable-desc-dir \
+	   --with-owner=news \
+	   --with-group=news
 
 %build
 libtoolize
 ./autogen.sh
-make DEBUG=-O2
 
 %make_build
 
