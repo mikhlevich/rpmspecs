@@ -36,6 +36,10 @@ DS fork of fidogate. It can be used as:
 %prep
 %setup -q -n fidogate-master
 
+%build
+libtoolize
+./autogen.sh
+
 %configure --prefix=/usr \
 	   --exec-prefix=/usr \
 	   --sysconfdir=/etc/fidogate \
@@ -45,13 +49,10 @@ DS fork of fidogate. It can be used as:
 	   --with-btbasedir=/var/spool/fido/bt \
 	   --with-sysconfdir=/etc/fidogate \
 	   --with-newsbindir=/usr/libexec/news \
+	   --with-rnews=/usr/libexec/news/rnews \
 	   --disable-desc-dir \
 	   --with-owner=news \
 	   --with-group=news
-
-%build
-libtoolize
-./autogen.sh
 
 %make_build
 
