@@ -38,6 +38,7 @@ DS fork of fidogate. It can be used as:
 
 %configure --prefix=/usr \
 	   --exec-prefix=/usr \
+	   --sysconfdir=/etc/fidogate \
 	   --with-logdir=/var/log/fido/gate \
 	   --with-vardir=/var/lib/fidogate \
 	   --with-spooldir=/var/spool/fido/gate \
@@ -145,5 +146,28 @@ rm -rf $RPM_BUILD_ROOT
 %config %{_localstatedir}/lib/fidogate/areas.bbs.sample
 %config %{_localstatedir}/lib/fidogate/fareas.bbs.sample
 
+%dir %attr(700,news,news) /etc/fido/gate
+%dir %attr(700,news,news) /var/log/fido/gate
+%attr(-,news,news) /usr/bin/*
+%attr(-,news,news) /usr/libexec/*
+%attr(-,news,news) /usr/lib/*
+%dir %attr(700,news,news) /var/lib/fidogate
+%dir %attr(700,news,news) /var/lib/fidogate/seq
+%attr(700,news,news) /var/lock/fidogate
+%attr(700,news,news) /var/spool/fido/gate
+%attr(770,news,news) /var/spool/fido/bt
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/acl.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/aliases.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/areas.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate.conf.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidokill.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/ftnacl.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/hosts.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/packing.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/passwd.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/routing.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/spyes.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/areas.bbs.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fareas.bbs.sample
 
 %changelog
