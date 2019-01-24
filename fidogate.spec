@@ -42,11 +42,10 @@ libtoolize
 
 %configure --prefix=/usr \
 	   --exec-prefix=/usr \
-	   --sysconfdir=/etc/fidogate \
-	   --with-logdir=/var/log/fido/gate \
+	   --with-logdir=/var/log/fidogate \
 	   --with-vardir=/var/lib/fidogate \
-	   --with-spooldir=/var/spool/fido/gate \
-	   --with-btbasedir=/var/spool/fido/bt \
+	   --with-spooldir=/var/spool/fidogate \
+	   --with-btbasedir=/var/spool/fidogate/bt \
 	   --with-sysconfdir=/etc/fidogate \
 	   --with-newsbindir=/usr/libexec/news \
 	   --with-rnews=/usr/libexec/news/rnews \
@@ -157,18 +156,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(700,news,news) /var/lock/fidogate
 %attr(700,news,news) /var/spool/fido/gate
 %attr(770,news,news) /var/spool/fido/bt
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/acl.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/aliases.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/areas.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate.conf.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidokill.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/ftnacl.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/hosts.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/packing.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/passwd.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/routing.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/spyes.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/areas.bbs.sample
-%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fareas.bbs.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/acl.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/aliases.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/areas.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/fidogate.conf.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/fidokill.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/ftnacl.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/hosts.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/packing.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/passwd.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/routing.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/spyes.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/areas.bbs.sample
+%config(noreplace) %attr(600,news,news) /etc/fidogate/fareas.bbs.sample
 
 %changelog
