@@ -1,9 +1,9 @@
 Summary: Binkd - the binkp daemon
-Name: master
+Name: binkd
 Version: 1.1a.99
 Release: 1
 License: GPL
-Source: %{name}.zip
+Source: master.zip
 URL: ftp://happy.kiev.ua/pub/fidosoft/mailer/binkd/
 Provides: binkd
 Requires: perl >= 5.8.3, zlib >= 1.2.3, bzip2 >= 1.0.3
@@ -14,7 +14,7 @@ Group: Applications/Internet
 Binkd is the daemon for FTN communications over reliable links.
 
 %prep
-%setup -q -n binkd
+%setup -q -n %{name}-master
 cp -p mkfls/unix/{Makefile*,configure*,install-sh,mkinstalldirs} .
 
 %build
