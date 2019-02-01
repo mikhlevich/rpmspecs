@@ -148,6 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libexecdir}/report_traffic
 %{_libexecdir}/rfc2ftn
 %{_libexecdir}/send-fidogate
+%config %{_localstatedir}/lib/fidogate/areas.sample
 %config %{_localstatedir}/lib/fidogate/areas.bbs.sample
 %config %{_localstatedir}/lib/fidogate/fareas.bbs.sample
 
@@ -181,6 +182,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/routing.sample
 %config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/spyes.sample
 %config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/uplinks.sample
+%config(noreplace) %attr(600,news,news) %{_localstatedir}/lib/fidogate/areas.sample
 %config(noreplace) %attr(600,news,news) %{_localstatedir}/lib/fidogate/areas.bbs.sample
 %config(noreplace) %attr(600,news,news) %{_localstatedir}/lib/fidogate/fareas.bbs.sample
 
