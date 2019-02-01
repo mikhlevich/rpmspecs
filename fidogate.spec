@@ -1,11 +1,12 @@
-Name:           fidogate-ds
-Version:        5.2.5
+Name:           fidogate
+Version:        5.2.4
 Release:        1%{?dist}
 Summary:        Fido-Internet Gateway and Tosser
 
 License:        GPLv2
 URL:            https://github.com/ykaliuta/fidogate
-Source0:        fidogate-5.2.5.zip
+Provides:	binkd
+Source:         %{name}-master.zip
 
 BuildRequires:  libtool
 BuildRequires:  libtool-ltdl
@@ -23,6 +24,7 @@ Requires:       zip
 Requires:       bison
 Requires:       inn
 Requires:	postfix
+Requires:	binkd
 
 %description
 DS fork of fidogate. It can be used as:
@@ -34,19 +36,20 @@ DS fork of fidogate. It can be used as:
 
 
 %prep
-%setup -q -n fidogate-master
+%setup -q -n %{name}-master
 
 %build
 libtoolize
 ./autogen.sh
 
-%configure --prefix=/usr \
-	   --exec-prefix=/usr \
+%configure --prefix=%{_prefix} \
+	   --exec-prefix=%{_prefix} \
 	   --with-logdir=/var/log/fidogate \
 	   --with-vardir=/var/lib/fidogate \
 	   --with-spooldir=/var/spool/fidogate \
+	   --with-lockdir=/var/lock/fidogate \
 	   --with-btbasedir=/var/spool/fidogate/bt \
-	   --with-sysconfdir=/etc/fidogate \
+	   --with-sysconfdir=%{_sysconfdir}/fidogate \
 	   --with-newsbindir=/usr/libexec/news \
 	   --with-rnews=/usr/libexec/news/rnews \
 	   --disable-desc-dir \
@@ -101,24 +104,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/senduu
 %{_bindir}/senduumail
 %{_bindir}/sumcrc
-%config %{_sysconfdir}/acl.sample
-%config %{_sysconfdir}/aliases.sample
-%config %{_sysconfdir}/bounce.acl
-%config %{_sysconfdir}/bounce.acl_netmail
-%config %{_sysconfdir}/bounce.addrinto
-%config %{_sysconfdir}/bounce.down
-%config %{_sysconfdir}/bounce.insecure
-%config %{_sysconfdir}/bounce.noto
-%config %{_sysconfdir}/bounce.restricted
-%config %{_sysconfdir}/fidogate.conf.sample
-%config %{_sysconfdir}/fidokill.sample
-%config %{_sysconfdir}/ftnacl.sample
-%config %{_sysconfdir}/hosts.sample
-%config %{_sysconfdir}/packing.sample
-%config %{_sysconfdir}/passwd.sample
-%config %{_sysconfdir}/routing.sample
-%config %{_sysconfdir}/spyes.sample
-%config %{_sysconfdir}/uplinks.sample
+%config %{_sysconfdir}/fidogate/acl.sample
+%config %{_sysconfdir}/fidogate/aliases.sample
+%config %{_sysconfdir}/fidogate/areafix.help.rus
+%config %{_sysconfdir}/fidogate/areafix.help.sample
+%config %{_sysconfdir}/fidogate/bounce.acl
+%config %{_sysconfdir}/fidogate/bounce.acl_netmail
+%config %{_sysconfdir}/fidogate/bounce.addrinto
+%config %{_sysconfdir}/fidogate/bounce.down
+%config %{_sysconfdir}/fidogate/bounce.insecure
+%config %{_sysconfdir}/fidogate/bounce.noto
+%config %{_sysconfdir}/fidogate/bounce.restricted
+%config %{_sysconfdir}/fidogate/fidogate.conf.sample
+%config %{_sysconfdir}/fidogate/fidokill.sample
+%config %{_sysconfdir}/fidogate/ftnacl.sample
+%config %{_sysconfdir}/fidogate/hosts.sample
+%config %{_sysconfdir}/fidogate/packing.sample
+%config %{_sysconfdir}/fidogate/passwd.sample
+%config %{_sysconfdir}/fidogate/routing.sample
+%config %{_sysconfdir}/fidogate/spyes.sample
+%config %{_sysconfdir}/fidogate/uplinks.sample
 %{_libdir}/libfidogate.a
 %{_libdir}/libfidogate.la
 %{_libdir}/libfidogate.so
@@ -146,28 +151,37 @@ rm -rf $RPM_BUILD_ROOT
 %config %{_localstatedir}/lib/fidogate/areas.bbs.sample
 %config %{_localstatedir}/lib/fidogate/fareas.bbs.sample
 
-%dir %attr(700,news,news) /etc/fido/gate
-%dir %attr(700,news,news) /var/log/fido/gate
+%dir %attr(700,news,news) /etc/fidogate
+%dir %attr(700,news,news) /var/log/fidogate
 %attr(-,news,news) /usr/bin/*
 %attr(-,news,news) /usr/libexec/*
 %attr(-,news,news) /usr/lib/*
 %dir %attr(700,news,news) /var/lib/fidogate
 %dir %attr(700,news,news) /var/lib/fidogate/seq
 %attr(700,news,news) /var/lock/fidogate
-%attr(700,news,news) /var/spool/fido/gate
-%attr(770,news,news) /var/spool/fido/bt
-%config(noreplace) %attr(600,news,news) /etc/fidogate/acl.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/aliases.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/areas.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/fidogate.conf.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/fidokill.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/ftnacl.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/hosts.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/packing.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/passwd.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/routing.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/spyes.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/areas.bbs.sample
-%config(noreplace) %attr(600,news,news) /etc/fidogate/fareas.bbs.sample
+%attr(700,news,news) /var/spool/fidogate
+%attr(770,news,news) /var/spool/fidogate/bt
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/acl.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/aliases.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/areafix.help.rus
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/areafix.help.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.acl
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.acl_netmail
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.addrinto
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.down
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.insecure
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.noto
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/bounce.restricted
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/fidogate.conf.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/fidokill.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/ftnacl.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/hosts.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/packing.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/passwd.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/routing.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/spyes.sample
+%config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/uplinks.sample
+%config(noreplace) %attr(600,news,news) %{_localstatedir}/lib/fidogate/areas.bbs.sample
+%config(noreplace) %attr(600,news,news) %{_localstatedir}/lib/fidogate/fareas.bbs.sample
 
 %changelog
