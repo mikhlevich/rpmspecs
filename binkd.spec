@@ -1,3 +1,4 @@
+%define debug_package %{nil}
 Summary: Binkd - the binkp daemon
 Name: binkd
 Version: 1.1a.99
@@ -36,8 +37,6 @@ rm -rf %{buildroot}%{_sysconfdir}
 rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
+%defattr(-,news,news)
 %{_sbindir}/*
 %{_mandir}/man8/*
-
-
