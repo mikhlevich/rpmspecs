@@ -3,7 +3,7 @@ Name: binkd
 Version: 1.1a.99
 Release: 1
 License: GPL
-Source: master.zip
+Source: %{name}-master.zip
 URL: ftp://happy.kiev.ua/pub/fidosoft/mailer/binkd/
 Provides: binkd
 Requires: perl >= 5.8.3, zlib >= 1.2.3, bzip2 >= 1.0.3
@@ -39,3 +39,5 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_sbindir}/*
 %{_mandir}/man8/*
+
+
