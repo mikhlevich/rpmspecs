@@ -45,14 +45,15 @@ libtoolize
 
 %configure --prefix=%{_prefix} \
 	   --exec-prefix=%{_prefix} \
-	   --with-logdir=/var/log/fidogate \
-	   --with-vardir=/var/lib/fidogate \
-	   --with-spooldir=/var/spool/fidogate \
-	   --with-lockdir=/var/lock/fidogate \
-	   --with-btbasedir=/var/spool/fidogate/bt \
+	   --libexecdir=%{_libexecdir}/fidogate \
+	   --with-logdir=%{_localstatedir}/log/fidogate \
+	   --with-vardir=%{_localstatedir}/lib/fidogate \
+	   --with-spooldir=%{_localstatedir}/spool/fidogate \
+	   --with-lockdir=%{_localstatedir}/lock/fidogate \
+	   --with-btbasedir=%{_localstatedir}/spool/fidogate/bt \
 	   --with-sysconfdir=%{_sysconfdir}/fidogate \
-	   --with-newsbindir=/usr/libexec/news \
-	   --with-rnews=/usr/libexec/news/rnews \
+	   --with-newsbindir=%{_libexecdir}/news \
+	   --with-rnews=%{_libexecdir}/news/rnews \
 	   --disable-desc-dir \
 	   --with-owner=news \
 	   --with-group=news
@@ -110,26 +111,27 @@ rm -rf %{buildroot}
 %attr(-,news,news) %{_libdir}/libfidogate.so
 %attr(-,news,news) %{_libdir}/libfidogate.so.5
 %attr(-,news,news) %{_libdir}/libfidogate.so.5.0.0
-%attr(-,news,news) %{_libexecdir}/charsetc
-%attr(-,news,news) %{_libexecdir}/confval
-%attr(-,news,news) %{_libexecdir}/ftn2ftn
-%attr(-,news,news) %{_libexecdir}/ftn2rfc
-%attr(-,news,news) %{_libexecdir}/ftnafmail
-%attr(-,news,news) %{_libexecdir}/ftnafpkt
-%attr(-,news,news) %{_libexecdir}/ftnflo
-%attr(-,news,news) %{_libexecdir}/ftnin
-%attr(-,news,news) %{_libexecdir}/ftninpost
-%attr(-,news,news) %{_libexecdir}/ftninrecomb
-%attr(-,news,news) %{_libexecdir}/ftnmail
-%attr(-,news,news) %{_libexecdir}/ftnpack
-%attr(-,news,news) %{_libexecdir}/ftnroute
-%attr(-,news,news) %{_libexecdir}/ftntick
-%attr(-,news,news) %{_libexecdir}/ftntickpost
-%attr(-,news,news) %{_libexecdir}/ftntoss
-%attr(-,news,news) %{_libexecdir}/report_traffic
-%attr(-,news,news) %{_libexecdir}/rfc2ftn
-%attr(-,news,news) %{_libexecdir}/send-fidogate
+%attr(-,news,news) %{_libexecdir}/fidogate/charsetc
+%attr(-,news,news) %{_libexecdir}/fidogate/confval
+%attr(-,news,news) %{_libexecdir}/fidogate/ftn2ftn
+%attr(-,news,news) %{_libexecdir}/fidogate/ftn2rfc
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnafmail
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnafpkt
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnflo
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnin
+%attr(-,news,news) %{_libexecdir}/fidogate/ftninpost
+%attr(-,news,news) %{_libexecdir}/fidogate/ftninrecomb
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnmail
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnpack
+%attr(-,news,news) %{_libexecdir}/fidogate/ftnroute
+%attr(-,news,news) %{_libexecdir}/fidogate/ftntick
+%attr(-,news,news) %{_libexecdir}/fidogate/ftntickpost
+%attr(-,news,news) %{_libexecdir}/fidogate/ftntoss
+%attr(-,news,news) %{_libexecdir}/fidogate/report_traffic
+%attr(-,news,news) %{_libexecdir}/fidogate/rfc2ftn
+%attr(-,news,news) %{_libexecdir}/fidogate/send-fidogate
 
+%dir %attr(770,news,news) %{_libexecdir}/fidogate
 %dir %attr(700,news,news) %{_sysconfdir}/fidogate
 %dir %attr(700,news,news) %{_localstatedir}/log/fidogate
 %dir %attr(700,news,news) %{_localstatedir}/lib/fidogate
