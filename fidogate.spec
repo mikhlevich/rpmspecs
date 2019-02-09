@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 Name:           fidogate
-Version:        5.2.4
-Release:        1%{?dist}
+Version:        5.2.5
+Release:        g%{?dist}
 Summary:        Fido-Internet Gateway and Tosser
 
 License:        GPLv2
@@ -49,6 +49,7 @@ libtoolize
 	   --with-logdir=%{_localstatedir}/log/fidogate \
 	   --with-vardir=%{_localstatedir}/lib/fidogate \
 	   --with-spooldir=%{_localstatedir}/spool/fidogate \
+	   --with-sysconfdir=%{_sysconfdir}/fidogate \
 	   --with-lockdir=%{_localstatedir}/lock/fidogate \
 	   --with-btbasedir=%{_localstatedir}/spool/fidogate/bt \
 	   --with-sysconfdir=%{_sysconfdir}/fidogate \
@@ -136,9 +137,42 @@ rm -rf %{buildroot}
 %dir %attr(700,news,news) %{_localstatedir}/log/fidogate
 %dir %attr(700,news,news) %{_localstatedir}/lib/fidogate
 %dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/mail
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/news
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/msgid
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/pkt
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/split
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/ff
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/toss
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/pack
+#%dir %attr(700,news,news) %{_localstatedir}/lib/fidogate/seq/tick
 %dir %attr(700,news,news) %{_localstatedir}/lock/fidogate
 %dir %attr(700,news,news) %{_localstatedir}/spool/fidogate
 %dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt
+#%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/ftpin
+#%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/ftpin/tmpunpack
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/in
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/in/bad
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/in/tmpunpack
+#%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/out
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/pin
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/pin/bad
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/pin/tmpunpack
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/bt/tick
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/uuin
+#%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/uuin/tmpunpack
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/ftpin
+#%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/ftpin/tmpunpack
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/outrfc
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/outrfc/mail
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/outrfc/news
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/outpkt
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/outpkt/mail
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/outpkt/news
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/toss
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/toss/route
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/toss/pack
+%dir %attr(770,news,news) %{_localstatedir}/spool/fidogate/toss/bad
 %config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/acl.sample
 %config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/aliases.sample
 %config(noreplace) %attr(600,news,news) %{_sysconfdir}/fidogate/areafix.help.rus
